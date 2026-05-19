@@ -291,8 +291,7 @@
       '.description',
       '.help-block',
       '.help-inline',
-      '.cbi-value',
-      '.cbi-section'
+      '.cbi-value'
     ].join(',');
 
     qsa(selector, root).forEach(function (el) {
@@ -300,8 +299,26 @@
       if (el.classList.contains('fwrt-help-managed')) return;
 
       var text = (el.textContent || '').replace(/\u00a0/g, ' ').trim();
-      var useful = el.querySelector('input, select, textarea, button, a, img, svg, canvas, table, .table, .tr, .cbi-button, .ifacebox, .ifacebadge, .cbi-dropdown, [data-tab-active="true"]');
+      var useful = el.querySelector('input, select, textarea, button, a, img, svg, canvas, table, .table, .tr, .td, .th, .cbi-button, .ifacebox, .ifacebadge, .cbi-dropdown, [data-tab-active="true"]');
       el.classList.toggle('fwrt-empty-structural', !text && !useful);
+    });
+
+    qsa('.cbi-section, .cbi-tblsection', root).forEach(function (section) {
+      if (section.closest('#modal_overlay, .modal, .alert-message, .cbi-page-actions, .actions')) return;
+
+      var text = (section.textContent || '').replace(/\u00a0/g, ' ').trim();
+      var useful = section.querySelector('input, select, textarea, button, a, img, svg, canvas, table, .table, .tr, .td, .th, .cbi-button, .ifacebox, .ifacebadge, .cbi-dropdown, [data-tab-active="true"]');
+      var hasVisibleBox = false;
+
+      Array.prototype.slice.call(section.children || []).some(function (child) {
+        if (child.classList && child.classList.contains('fwrt-empty-structural')) return false;
+        var style = window.getComputedStyle(child);
+        if (style.display === 'none' || style.visibility === 'hidden') return false;
+        hasVisibleBox = child.offsetWidth > 0 || child.offsetHeight > 0;
+        return hasVisibleBox;
+      });
+
+      section.classList.toggle('fwrt-empty-structural', !text && !useful && !hasVisibleBox);
     });
   }
 
@@ -383,7 +400,7 @@
   function normalizeActionDropdowns(root) {
     qsa('.cbi-page-actions .cbi-dropdown.cbi-button, .actions .cbi-dropdown.cbi-button', root).forEach(function (drop) {
       var preview = Array.prototype.slice.call(drop.children || []).filter(function (child) {
-        return child.tagName === 'UL' && !child.classList.contains('dropdown');
+        return child.tagName === 'UL' && !child.classList.contains('dropdown') && !child.classList.contains('preview');
       })[0];
       if (!preview) return;
 
@@ -398,15 +415,17 @@
       });
       if (!items.length) return;
 
-      var main = null;
+      var main = items.filter(function (item) {
+        return item.hasAttribute('display') || item.hasAttribute('selected');
+      })[0] || null;
+
       items.forEach(function (item) {
         var text = (item.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
         var isUnchecked = text.indexOf('unchecked') !== -1;
-        item.removeAttribute('aria-hidden');
         item.classList.remove('fwrt-action-preview-main');
         item.classList.remove('fwrt-action-preview-extra');
 
-        if (isUnchecked)
+        if (isUnchecked || item.getAttribute('aria-hidden') === 'true')
           item.classList.add('fwrt-action-preview-extra');
         else if (!main)
           main = item;

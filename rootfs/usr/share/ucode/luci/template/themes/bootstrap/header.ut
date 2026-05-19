@@ -43,8 +43,8 @@
 		{% endif %}
 		<script src="{{ dispatcher.build_url('admin/translations', dispatcher.lang) }}"></script>
 		<script src="{{ resource }}/cbi.js?v=26.124.63982~650a6ca"></script>
-<link rel="stylesheet" href="/luci-static/bootstrap/fwrt-global-fixes.css?v=blankfix-20260518">
-		<script defer src="/luci-static/bootstrap/fwrt-global-fixes.js?v=wireless-gold-fit-1778961755"></script>
+	<link rel="stylesheet" href="/luci-static/bootstrap/fwrt-global-fixes.css?v=actions-networkfix-20260519">
+			<script defer src="/luci-static/bootstrap/fwrt-global-fixes.js?v=actions-networkfix-20260519"></script>
 	</head>
 
 	<body class="lang_{{ dispatcher.lang }} {{ entityencode(striptags(node?.title ?? ''), true) }}" data-page="{{ entityencode(join('-', ctx.request_path), true) }}">

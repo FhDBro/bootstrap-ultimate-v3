@@ -1605,7 +1605,7 @@ body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge im
   border-radius: 10px !important;
 }
 
-/* Root Save & Apply fix: scope ComboButton layout to the footer action control only. */
+/* Stable LuCI split Save & Apply control. Keep LuCI's own [open] state intact. */
 .cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply,
 .cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo,
 .actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo {
@@ -1621,6 +1621,7 @@ body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge im
   height: 36px !important;
   min-height: 36px !important;
   padding: 0 !important;
+  margin: 0 !important;
   border: 1px solid var(--fwrt-amber-line) !important;
   border-radius: 10px !important;
   background:
@@ -1631,11 +1632,13 @@ body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge im
     inset 0 1px 0 rgba(255,255,255,.14),
     0 0 14px rgba(255,176,32,.16) !important;
   overflow: visible !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
 }
 
-.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown),
-.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown),
-.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) {
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown):not(.preview),
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview),
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) {
   box-sizing: border-box !important;
   display: flex !important;
   align-items: center !important;
@@ -1658,9 +1661,15 @@ body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge im
   overflow: hidden !important;
 }
 
-.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown) > li,
-.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li,
-.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li {
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul.preview,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul.preview,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul.preview {
+  display: none !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown):not(.preview) > li,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li {
   display: none !important;
   align-items: center !important;
   justify-content: center !important;
@@ -1675,21 +1684,30 @@ body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge im
   text-overflow: ellipsis !important;
 }
 
-.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown) > li:first-child,
-.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li:first-child,
-.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li:first-child {
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown):not(.preview) > li:first-child,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li:first-child,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li:first-child {
   display: inline-flex !important;
 }
 
-.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown) > li.fwrt-action-preview-extra,
-.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li.fwrt-action-preview-extra,
-.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li.fwrt-action-preview-extra {
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown):not(.preview) > li[aria-hidden="true"],
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li[aria-hidden="true"],
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li[aria-hidden="true"],
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown):not(.preview) > li.fwrt-action-preview-extra,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li.fwrt-action-preview-extra,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li.fwrt-action-preview-extra {
   display: none !important;
 }
 
-.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown) > li.fwrt-action-preview-main,
-.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li.fwrt-action-preview-main,
-.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li.fwrt-action-preview-main {
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown):not(.preview) > li[display],
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown):not(.preview) > li[selected],
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li[display],
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li[selected],
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li[display],
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li[selected],
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown):not(.preview) > li.fwrt-action-preview-main,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li.fwrt-action-preview-main,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown):not(.preview) > li.fwrt-action-preview-main {
   display: inline-flex !important;
 }
 
@@ -1724,6 +1742,7 @@ body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge im
   display: none !important;
   list-style: none !important;
   margin: 0 !important;
+  pointer-events: auto !important;
 }
 
 .cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply[open],
@@ -1743,7 +1762,8 @@ body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge im
   box-sizing: border-box !important;
   display: block !important;
   position: absolute !important;
-  top: calc(100% + 8px) !important;
+  top: auto !important;
+  bottom: calc(100% + 8px) !important;
   right: 0 !important;
   left: auto !important;
   z-index: 50001 !important;
