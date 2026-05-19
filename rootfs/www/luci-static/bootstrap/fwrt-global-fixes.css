@@ -1,0 +1,2012 @@
+/* FWRT global fixes for active bootstrap theme */
+:root {
+  --fwrt-accent: #ffb020;
+  --fwrt-accent-2: #ff6b8a;
+  --fwrt-panel: rgba(16, 24, 38, .52);
+  --fwrt-panel-border: rgba(255, 176, 32, .24);
+}
+
+html.fwrt-modal-open {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+body.fwrt-modal-open {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+body.fwrt-modal-open #modal_overlay,
+body.fwrt-modal-open #modal_overlay > .modal,
+body.fwrt-modal-open #modal_overlay .modal-dialog,
+body.fwrt-modal-open #modal_overlay .modal-content {
+  touch-action: pan-y !important;
+}
+body.fwrt-modal-open #modal_overlay {
+  overscroll-behavior: contain !important;
+}
+
+#modal_overlay,
+#modal_overlay > .modal,
+#modal_overlay .modal-dialog,
+#modal_overlay .modal-content {
+  z-index: 40000 !important;
+}
+
+/* Compact readable raw values on LuCI progress bars */
+.cbi-progressbar[title], .progress[title] {
+  position: relative !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--fwrt-panel-border) !important;
+  border-radius: 9px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.018)), var(--fwrt-panel) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 10px 24px rgba(0,0,0,.12) !important;
+}
+.cbi-progressbar[title] > div, .progress[title] > div,
+.cbi-progressbar[title] > .bar, .progress[title] > .bar,
+.cbi-progressbar[title] > .progress-bar, .progress[title] > .progress-bar {
+  height: 100% !important;
+  min-height: 100% !important;
+  border-radius: 8px !important;
+  opacity: .42 !important;
+  background: linear-gradient(90deg, rgba(255,176,32,.95), rgba(255,107,138,.78)) !important;
+  box-shadow: 0 0 18px rgba(255,176,32,.24) !important;
+}
+.cbi-progressbar[title]::after, .progress[title]::after { content: none !important; }
+.cbi-progressbar .fwrt-progress-title, .progress .fwrt-progress-title {
+  position: absolute !important;
+  right: 7px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 5 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  max-width: calc(100% - 14px) !important;
+  min-height: 18px !important;
+  padding: 2px 8px !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 999px !important;
+  background: rgba(8, 12, 20, .46) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  color: #fff8e8 !important;
+  font: 700 11px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  letter-spacing: 0 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.65) !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
+.cbi-progressbar .fwrt-progress-title::before, .progress .fwrt-progress-title::before {
+  content: "used";
+  margin-right: 6px;
+  color: rgba(255,255,255,.62);
+  font-weight: 650;
+  text-transform: uppercase;
+  font-size: 9px;
+}
+
+/* Help text is hidden globally until the ? control is pressed */
+.cbi-value-description.fwrt-help-managed,
+.cbi-section-descr.fwrt-help-managed,
+.cbi-section-table-descr.fwrt-help-managed,
+.cbi-tab-descr.fwrt-help-managed,
+.description.fwrt-help-managed,
+.help-block.fwrt-help-managed,
+.help-inline.fwrt-help-managed {
+  display: none !important;
+}
+.fwrt-help-open > .cbi-value-description.fwrt-help-managed,
+.fwrt-help-open > .cbi-section-descr.fwrt-help-managed,
+.fwrt-help-open > .cbi-section-table-descr.fwrt-help-managed,
+.fwrt-help-open > .cbi-tab-descr.fwrt-help-managed,
+.fwrt-help-open > .description.fwrt-help-managed,
+.fwrt-help-open > .help-block.fwrt-help-managed,
+.fwrt-help-open > .help-inline.fwrt-help-managed,
+.fwrt-help-open .cbi-value-description.fwrt-help-managed,
+.fwrt-help-open .cbi-section-descr.fwrt-help-managed,
+.fwrt-help-open .cbi-section-table-descr.fwrt-help-managed,
+.fwrt-help-open .cbi-tab-descr.fwrt-help-managed,
+.fwrt-help-open .description.fwrt-help-managed,
+.fwrt-help-open .help-block.fwrt-help-managed,
+.fwrt-help-open .help-inline.fwrt-help-managed {
+  display: block !important;
+  margin-top: 8px !important;
+  padding: 8px 10px !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 7px !important;
+  background: rgba(12,18,30,.36) !important;
+  color: var(--text-color-medium, #b8c3d1) !important;
+}
+.fwrt-help-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  margin-left: 7px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(255,176,32,.38) !important;
+  border-radius: 50% !important;
+  background: rgba(255,176,32,.10) !important;
+  color: #ffcf70 !important;
+  font: 800 12px/1 system-ui, sans-serif !important;
+  cursor: pointer !important;
+  vertical-align: middle !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+.fwrt-help-btn:hover, .fwrt-help-btn:focus,
+.fwrt-help-open .fwrt-help-btn {
+  background: rgba(255,176,32,.22) !important;
+  color: #fff3d0 !important;
+  outline: none !important;
+}
+
+.fwrt-help-open .fwrt-help-managed::before,
+.fwrt-help-open .cbi-value-description.fwrt-help-managed::before,
+.fwrt-help-open .cbi-section-descr.fwrt-help-managed::before,
+.fwrt-help-open .cbi-section-table-descr.fwrt-help-managed::before,
+.fwrt-help-open .cbi-tab-descr.fwrt-help-managed::before,
+.fwrt-help-open .description.fwrt-help-managed::before,
+.fwrt-help-open .help-block.fwrt-help-managed::before,
+.fwrt-help-open .help-inline.fwrt-help-managed::before,
+.fwrt-help-open .cbi-map-descr.fwrt-help-managed::before {
+  content: "?" !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  margin: 0 7px 0 0 !important;
+  padding: 0 !important;
+  border: 1px solid rgba(255,176,32,.38) !important;
+  border-radius: 50% !important;
+  background: rgba(255,176,32,.22) !important;
+  color: #fff3d0 !important;
+  font: 800 12px/1 system-ui, sans-serif !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07) !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  position: static !important;
+  vertical-align: middle !important;
+}
+
+/* Fix clipped text in Wireless edit and other compact LuCI controls */
+.cbi-value-field,
+.cbi-value-field label,
+.cbi-value-field .cbi-dropdown,
+.cbi-value-field .cbi-select {
+  overflow: visible !important;
+}
+.cbi-value-field label.fwrt-frequency-control {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  min-width: 112px !important;
+  margin: 0 8px 8px 0 !important;
+  float: none !important;
+  color: var(--text-color-medium, #b8c3d1) !important;
+  font-size: 12px !important;
+}
+select.mode, select.band, select.channel, select.htmode,
+.cbi-value-field select,
+.cbi-value-field .cbi-select,
+.cbi-value-field .cbi-dropdown:not(.btn):not(.cbi-button),
+.cbi-value-field input[type="text"],
+.cbi-value-field input[type="password"],
+.cbi-value-field input[type="number"] {
+  min-height: 36px !important;
+  height: auto !important;
+  line-height: 1.35 !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  overflow: visible !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  vertical-align: middle !important;
+}
+select.mode, select.band, select.channel, select.htmode {
+  min-width: 112px !important;
+  max-width: 100% !important;
+  width: auto !important;
+}
+select.channel { min-width: 148px !important; }
+
+/* Polished non-green toggles */
+input[type="checkbox"].cbi-input-checkbox,
+input[type="checkbox"][data-widget="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 46px !important;
+  height: 24px !important;
+  min-width: 46px !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)), rgba(30,36,48,.92) !important;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.05) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  transition: background .22s ease, border-color .22s ease, box-shadow .22s ease !important;
+  vertical-align: middle !important;
+}
+input[type="checkbox"].cbi-input-checkbox::before,
+input[type="checkbox"][data-widget="checkbox"]::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 18px !important;
+  height: 18px !important;
+  left: 2px !important;
+  top: 2px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(180deg, #ffffff, #d8dde8) !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,.34) !important;
+  transition: transform .24s cubic-bezier(.2,.85,.25,1.2), background .22s ease, box-shadow .22s ease !important;
+}
+input[type="checkbox"].cbi-input-checkbox:checked,
+input[type="checkbox"][data-widget="checkbox"]:checked {
+  border-color: rgba(255,176,32,.58) !important;
+  background: linear-gradient(135deg, rgba(255,176,32,.95), rgba(255,107,138,.86)) !important;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.22), 0 0 0 3px rgba(255,176,32,.12) !important;
+}
+input[type="checkbox"].cbi-input-checkbox:checked::before,
+input[type="checkbox"][data-widget="checkbox"]:checked::before {
+  transform: translateX(22px) !important;
+  background: linear-gradient(180deg, #fffaf0, #ffe2a6) !important;
+  box-shadow: 0 4px 12px rgba(58,26,0,.35) !important;
+}
+input[type="checkbox"].cbi-input-checkbox:focus-visible,
+input[type="checkbox"][data-widget="checkbox"]:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(255,176,32,.20), inset 0 1px 3px rgba(0,0,0,.34) !important;
+}
+
+/* UI2 refinements */
+.cbi-progressbar[title]::before,
+.progress[title]::before {
+  content: none !important;
+  display: none !important;
+}
+.cbi-value-field label.fwrt-frequency-control {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  min-width: 118px !important;
+  margin: 0 8px 8px 0 !important;
+  float: none !important;
+  color: var(--text-color-medium, #b8c3d1) !important;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+}
+.cbi-value-field label.fwrt-frequency-control select {
+  min-width: 118px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  min-height: 38px !important;
+  line-height: 1.35 !important;
+  padding: 8px 28px 8px 10px !important;
+}
+.cbi-value-field label.fwrt-frequency-control select.channel { min-width: 154px !important; }
+.cbi-map-descr.fwrt-help-managed { display: none !important; }
+.fwrt-help-open > .cbi-map-descr.fwrt-help-managed,
+.fwrt-help-open .cbi-map-descr.fwrt-help-managed {
+  display: block !important;
+  margin-top: 8px !important;
+  padding: 8px 10px !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 7px !important;
+  background: rgba(12,18,30,.36) !important;
+}
+input[type="checkbox"].cbi-input-checkbox,
+.cbi-checkbox input[type="checkbox"],
+.cbi-value-field > input[type="checkbox"],
+.cbi-value-field label > input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 46px !important;
+  height: 24px !important;
+  min-width: 46px !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)), rgba(30,36,48,.92) !important;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.05) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  transition: background .22s ease, border-color .22s ease, box-shadow .22s ease !important;
+  vertical-align: middle !important;
+}
+input[type="checkbox"].cbi-input-checkbox::after,
+.cbi-checkbox input[type="checkbox"]::after,
+.cbi-value-field > input[type="checkbox"]::after,
+.cbi-value-field label > input[type="checkbox"]::after {
+  content: none !important;
+  display: none !important;
+}
+input[type="checkbox"].cbi-input-checkbox::before,
+.cbi-checkbox input[type="checkbox"]::before,
+.cbi-value-field > input[type="checkbox"]::before,
+.cbi-value-field label > input[type="checkbox"]::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 18px !important;
+  height: 18px !important;
+  left: 2px !important;
+  top: 2px !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: linear-gradient(180deg, #ffffff, #d8dde8) !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,.34) !important;
+  transition: transform .24s cubic-bezier(.2,.85,.25,1.2), background .22s ease, box-shadow .22s ease !important;
+}
+input[type="checkbox"].cbi-input-checkbox:checked,
+.cbi-checkbox input[type="checkbox"]:checked,
+.cbi-value-field > input[type="checkbox"]:checked,
+.cbi-value-field label > input[type="checkbox"]:checked {
+  border-color: rgba(255,176,32,.58) !important;
+  background: linear-gradient(135deg, rgba(255,176,32,.95), rgba(255,107,138,.86)) !important;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.22), 0 0 0 3px rgba(255,176,32,.12) !important;
+}
+input[type="checkbox"].cbi-input-checkbox:checked::before,
+.cbi-checkbox input[type="checkbox"]:checked::before,
+.cbi-value-field > input[type="checkbox"]:checked::before,
+.cbi-value-field label > input[type="checkbox"]:checked::before {
+  transform: translateX(22px) !important;
+  background: linear-gradient(180deg, #fffaf0, #ffe2a6) !important;
+  box-shadow: 0 4px 12px rgba(58,26,0,.35) !important;
+}
+
+/* UI2 progress pill: keep only the compact value, subject stays in the left column */
+.cbi-progressbar .fwrt-progress-title::before,
+.progress .fwrt-progress-title::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* FWRT port/icon active glow: subtle off-white neon, not distracting */
+:root {
+  --fwrt-soft-neon: rgba(246, 250, 255, .78);
+  --fwrt-soft-neon-dim: rgba(232, 244, 255, .30);
+  --fwrt-soft-neon-ring: rgba(255, 255, 255, .20);
+}
+.ifacebadge-active,
+.ifacebox .ifacebox-head.active,
+.ifacebadge.fwrt-active-port,
+.port-status-device.fwrt-active-port,
+.port-status-link.fwrt-active-port,
+header [data-indicator][data-style="active"],
+.nav .active > a,
+.tabs > li.active > a,
+.cbi-tabmenu > li.cbi-tab > a {
+  border-color: rgba(246,250,255,.42) !important;
+  box-shadow:
+    0 0 0 1px var(--fwrt-soft-neon-ring),
+    0 0 10px rgba(246,250,255,.16),
+    0 0 22px rgba(232,244,255,.11),
+    inset 0 1px 0 rgba(255,255,255,.16) !important;
+}
+.ifacebadge-active img,
+.ifacebadge.fwrt-active-port img,
+.port-status-device.fwrt-active-port img,
+.port-status-link.fwrt-active-port img,
+.cbi-tooltip-container > img.middle:not([src*="_disabled"]) {
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,.72))
+    drop-shadow(0 0 8px rgba(232,244,255,.28)) !important;
+}
+
+/* Navigation polish: clearer active states without changing layout. */
+:root {
+  --fwrt-nav-active-bg: linear-gradient(90deg, rgba(255,176,32,.18), rgba(255,107,138,.10));
+  --fwrt-nav-active-line: rgba(255,176,32,.78);
+  --fwrt-nav-active-text: #fff4d4;
+  --fwrt-nav-hover-bg: rgba(255,176,32,.10);
+  --fwrt-nav-transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+header .nav > li > a,
+#topmenu a,
+#mainmenu a,
+.tabs > li > a,
+.cbi-tabmenu > li > a,
+.dropdown-menu > li > a,
+.cbi-dropdown[open] > ul.dropdown > li,
+.btn,
+.cbi-button,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  transition: var(--fwrt-nav-transition) !important;
+}
+
+header .nav > li.active > a,
+header .nav > li.selected > a,
+#topmenu li.active > a,
+#topmenu li.selected > a,
+#mainmenu li.active > a,
+#mainmenu li.selected > a,
+.nav .active > a,
+.nav .selected > a {
+  position: relative !important;
+  background: var(--fwrt-nav-active-bg) !important;
+  color: var(--fwrt-nav-active-text) !important;
+  border-color: rgba(255,176,32,.34) !important;
+  box-shadow:
+    inset 3px 0 0 var(--fwrt-nav-active-line),
+    inset 0 0 0 1px rgba(255,176,32,.18),
+    0 10px 24px rgba(255,176,32,.10) !important;
+  text-shadow: 0 1px 8px rgba(255,176,32,.24) !important;
+}
+
+.tabs > li.active > a,
+.tabs > li.selected > a,
+.cbi-tabmenu > li.active > a,
+.cbi-tabmenu > li.selected > a,
+.cbi-tabmenu > li.cbi-tab > a {
+  position: relative !important;
+  background: var(--fwrt-nav-active-bg) !important;
+  color: var(--fwrt-nav-active-text) !important;
+  border-color: rgba(255,176,32,.38) !important;
+  box-shadow:
+    inset 0 -3px 0 var(--fwrt-nav-active-line),
+    inset 0 0 0 1px rgba(255,176,32,.16),
+    0 10px 24px rgba(255,176,32,.09) !important;
+}
+
+header .nav > li > a:hover,
+#topmenu a:hover,
+#mainmenu a:hover,
+.tabs > li > a:hover,
+.cbi-tabmenu > li > a:hover,
+.btn:hover,
+.cbi-button:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background-color: var(--fwrt-nav-hover-bg) !important;
+  color: #fff8e8 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,176,32,.14), 0 8px 18px rgba(0,0,0,.18) !important;
+}
+.ifacebadge.fwrt-active-port,
+.port-status-device.fwrt-active-port,
+.port-status-link.fwrt-active-port {
+  color: rgba(255,255,255,.92) !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.115), rgba(255,255,255,.038)), rgba(255,255,255,.025) !important;
+}
+.port-status-link.fwrt-inactive-port,
+.port-status-device.fwrt-inactive-port,
+.ifacebadge.fwrt-inactive-port {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.045) !important;
+  opacity: .78;
+}
+.port-status-link.fwrt-inactive-port img,
+.port-status-device.fwrt-inactive-port img,
+.ifacebadge.fwrt-inactive-port img {
+  filter: none !important;
+  opacity: .72;
+}
+
+/* Stable global action button row: fixes Save / Stop / Save & Reload layout bugs */
+.cbi-page-actions,
+.actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+  overflow: visible !important;
+  text-align: right !important;
+}
+.cbi-page-actions > form,
+.actions > form,
+.cbi-page-actions > div,
+.actions > div {
+  display: inline-flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  float: none !important;
+}
+.cbi-page-actions input[type="submit"],
+.cbi-page-actions input[type="button"],
+.cbi-page-actions input[type="reset"],
+.cbi-page-actions button,
+.cbi-page-actions .btn:not(.cbi-dropdown),
+.cbi-page-actions .cbi-button:not(.cbi-dropdown),
+.actions input[type="submit"],
+.actions input[type="button"],
+.actions input[type="reset"],
+.actions button,
+.actions .btn:not(.cbi-dropdown),
+.actions .cbi-button:not(.cbi-dropdown) {
+  width: auto !important;
+  min-width: 92px !important;
+  max-width: 230px !important;
+  min-height: 34px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  float: none !important;
+}
+.cbi-page-actions br,
+.actions br { display: none !important; }
+.cbi-page-actions .spinning,
+.actions .spinning {
+  min-width: 112px !important;
+  padding-left: 32px !important;
+}
+@media (max-width: 640px) {
+  .cbi-page-actions,
+  .actions { justify-content: stretch !important; }
+  .cbi-page-actions > form,
+  .actions > form,
+  .cbi-page-actions > div,
+  .actions > div { flex: 1 1 100% !important; justify-content: stretch !important; }
+  .cbi-page-actions input[type="submit"],
+  .cbi-page-actions input[type="button"],
+  .cbi-page-actions input[type="reset"],
+  .cbi-page-actions button,
+  .cbi-page-actions .btn:not(.cbi-dropdown),
+  .cbi-page-actions .cbi-button:not(.cbi-dropdown),
+  .actions input[type="submit"],
+  .actions input[type="button"],
+  .actions input[type="reset"],
+  .actions button,
+  .actions .btn:not(.cbi-dropdown),
+  .actions .cbi-button:not(.cbi-dropdown) { flex: 1 1 100% !important; max-width: none !important; }
+}
+
+/* WAN/overview port-card glow + compact action buttons */
+.ifacebox.fwrt-active-port,
+.network-status-table .ifacebox.fwrt-active-port {
+  border-color: rgba(246,250,255,.46) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.18),
+    0 0 10px rgba(246,250,255,.15),
+    0 0 20px rgba(232,244,255,.10),
+    inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+.ifacebox.fwrt-active-port .ifacebox-head:first-child,
+.network-status-table .ifacebox.fwrt-active-port .ifacebox-head:first-child {
+  color: rgba(255,255,255,.94) !important;
+  text-shadow: 0 0 7px rgba(246,250,255,.28) !important;
+}
+.ifacebox.fwrt-active-port img,
+.network-status-table .ifacebox.fwrt-active-port img {
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,.70))
+    drop-shadow(0 0 8px rgba(232,244,255,.26)) !important;
+}
+.ifacebox.fwrt-inactive-port img,
+.network-status-table .ifacebox.fwrt-inactive-port img {
+  filter: none !important;
+  opacity: .72 !important;
+}
+.cbi-page-actions input[type="submit"],
+.cbi-page-actions input[type="button"],
+.cbi-page-actions input[type="reset"],
+.cbi-page-actions button,
+.cbi-page-actions .btn:not(.cbi-dropdown),
+.cbi-page-actions .cbi-button:not(.cbi-dropdown),
+.actions input[type="submit"],
+.actions input[type="button"],
+.actions input[type="reset"],
+.actions button,
+.actions .btn:not(.cbi-dropdown),
+.actions .cbi-button:not(.cbi-dropdown) {
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: 30px !important;
+  padding: 6px 10px !important;
+  font-size: 12.5px !important;
+  flex: 0 0 auto !important;
+}
+.cbi-page-actions .cbi-button-save:not(.cbi-dropdown),
+.cbi-page-actions .cbi-button-apply:not(.cbi-dropdown),
+.cbi-page-actions input[name="cbi.apply"],
+.cbi-page-actions input[name="cbi.save"],
+.cbi-page-actions input[name="cbi.submit"],
+.actions .cbi-button-save:not(.cbi-dropdown),
+.actions .cbi-button-apply:not(.cbi-dropdown) {
+  min-width: 72px !important;
+}
+
+/* FWRT dropdown polish for active Bootstrap theme */
+:root {
+  --fwrt-dropdown-bg: rgba(7, 11, 19, .985);
+  --fwrt-dropdown-bg-2: rgba(14, 22, 36, .975);
+  --fwrt-dropdown-line: rgba(255, 176, 32, .28);
+  --fwrt-dropdown-line-soft: rgba(255, 255, 255, .07);
+  --fwrt-dropdown-text: #eef5ff;
+  --fwrt-dropdown-muted: #aebbd0;
+  --fwrt-dropdown-hover: rgba(255, 176, 32, .16);
+  --fwrt-dropdown-selected: rgba(255, 107, 138, .18);
+}
+.dropdown-menu,
+header .nav .dropdown-menu,
+.tabs .dropdown-menu,
+.cbi-dropdown[open] > ul.dropdown,
+.cbi-dropdown > ul.preview,
+.select2-dropdown,
+.select2-container--open .select2-dropdown,
+.cbi-filebrowser,
+.cbi-filebrowser > ul {
+  z-index: 40000 !important;
+  background-color: var(--fwrt-dropdown-bg) !important;
+  background-image:
+    linear-gradient(180deg, var(--fwrt-dropdown-bg-2), var(--fwrt-dropdown-bg)),
+    linear-gradient(rgba(255,176,32,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,107,138,.030) 1px, transparent 1px) !important;
+  background-size: auto, 28px 28px, 28px 28px !important;
+  border: 1px solid var(--fwrt-dropdown-line) !important;
+  border-radius: 10px !important;
+  color: var(--fwrt-dropdown-text) !important;
+  text-shadow: none !important;
+  box-shadow:
+    0 18px 48px rgba(0,0,0,.70),
+    0 0 0 1px var(--fwrt-dropdown-line-soft) inset,
+    0 0 28px rgba(255,176,32,.10) !important;
+  backdrop-filter: blur(18px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(145%) !important;
+  background-clip: padding-box !important;
+}
+.cbi-dropdown[open] > ul.dropdown {
+  z-index: 40000 !important;
+  padding: 6px !important;
+  overflow-y: auto !important;
+  scrollbar-color: rgba(255,176,32,.45) transparent !important;
+}
+.dropdown-menu,
+header .nav .dropdown-menu,
+.tabs .dropdown-menu {
+  padding: 6px !important;
+}
+.cbi-dropdown:not(.btn):not(.cbi-button),
+.cbi-select,
+select,
+select option,
+select optgroup {
+  background-color: rgba(7, 11, 19, .96) !important;
+  color: var(--fwrt-dropdown-text) !important;
+  border-color: rgba(255,176,32,.24) !important;
+}
+.cbi-dropdown > ul > li,
+.cbi-dropdown[open] > ul.dropdown > li,
+.cbi-dropdown > ul.preview > li,
+.dropdown-menu li,
+.dropdown-menu > li > a,
+header .nav .dropdown-menu li,
+header .nav .dropdown-menu > li > a,
+.tabs .dropdown-menu a,
+.select2-container--default .select2-results__option,
+.select2-results__option,
+.cbi-filebrowser li,
+.cbi-filebrowser div {
+  background: transparent !important;
+  color: var(--fwrt-dropdown-muted) !important;
+  text-shadow: none !important;
+}
+.cbi-dropdown[open] > ul.dropdown > li,
+.dropdown-menu > li > a,
+header .nav .dropdown-menu > li > a,
+.tabs .dropdown-menu a,
+.select2-results__option {
+  border-radius: 7px !important;
+  border-bottom: 0 !important;
+  padding: 7px 10px !important;
+  transition: background-color .14s ease, color .14s ease, box-shadow .14s ease !important;
+}
+.cbi-dropdown[open] > ul.dropdown > li.focus,
+.cbi-dropdown[open] > ul.dropdown > li:hover,
+.cbi-dropdown[open] > ul.dropdown > li[selected],
+.cbi-dropdown[open] > ul.dropdown > li[selected].focus,
+.cbi-dropdown[open] > ul.dropdown > li[selected]:hover,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > .active > a,
+header .nav .dropdown-menu > li > a:hover,
+header .nav .dropdown-menu .active > a,
+.tabs .dropdown-menu a:hover,
+.select2-container--default .select2-results__option--highlighted,
+.select2-results__option--highlighted,
+.select2-results__option[aria-selected="true"] {
+  background: linear-gradient(90deg, var(--fwrt-dropdown-hover), rgba(255,107,138,.10)) !important;
+  color: #fff7e5 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,176,32,.18) !important;
+}
+.cbi-dropdown[open] > ul.dropdown > li[selected] {
+  background: linear-gradient(90deg, var(--fwrt-dropdown-selected), rgba(255,176,32,.10)) !important;
+  color: #ffe7ad !important;
+}
+.cbi-dropdown[open] > ul.dropdown > li[unselectable],
+.cbi-dropdown[open] > ul.dropdown > li[placeholder] {
+  color: rgba(174,187,208,.68) !important;
+}
+.cbi-dropdown[open] > ul.dropdown > li > form,
+.cbi-dropdown[open] > ul.dropdown > li > label {
+  color: inherit !important;
+}
+.cbi-dropdown[open] > ul.dropdown input.create-item-input,
+.cbi-dropdown[open] > ul.dropdown input[type="text"] {
+  background: rgba(2, 5, 10, .78) !important;
+  border: 1px solid rgba(255,176,32,.28) !important;
+  color: var(--fwrt-dropdown-text) !important;
+}
+.dropdown-menu .divider,
+header .nav .dropdown-menu .divider {
+  background: rgba(255,176,32,.18) !important;
+  height: 1px !important;
+  margin: 5px 2px !important;
+}
+
+/* Wireless page: force all LuCI select/dropdown widgets into FWRT styling */
+body[data-page="admin-network-wireless"] select,
+body[data-page="admin-network-wireless"] .cbi-select,
+body[data-page="admin-network-wireless"] .cbi-dropdown:not(.btn):not(.cbi-button),
+body[data-page="admin-network-wireless"] .td select,
+body[data-page="admin-network-wireless"] .td .cbi-select,
+body[data-page="admin-network-wireless"] .td .cbi-dropdown:not(.btn):not(.cbi-button),
+body[data-page="admin-network-wireless"] .cbi-value-field select,
+body[data-page="admin-network-wireless"] .cbi-value-field .cbi-select,
+body[data-page="admin-network-wireless"] .cbi-value-field .cbi-dropdown:not(.btn):not(.cbi-button),
+body[data-page="admin-network-wireless"] #modal_overlay select,
+body[data-page="admin-network-wireless"] #modal_overlay .cbi-select,
+body[data-page="admin-network-wireless"] #modal_overlay .cbi-dropdown:not(.btn):not(.cbi-button) {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  min-height: 38px !important;
+  height: auto !important;
+  line-height: 1.35 !important;
+  padding: 8px 34px 8px 11px !important;
+  border: 1px solid rgba(255,176,32,.30) !important;
+  border-radius: 9px !important;
+  background-color: rgba(7, 11, 19, .96) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.018)),
+    linear-gradient(45deg, transparent 50%, #ffcf70 50%),
+    linear-gradient(135deg, #ffcf70 50%, transparent 50%) !important;
+  background-position:
+    0 0,
+    calc(100% - 18px) 50%,
+    calc(100% - 13px) 50% !important;
+  background-size:
+    100% 100%,
+    5px 5px,
+    5px 5px !important;
+  background-repeat: no-repeat !important;
+  color: var(--fwrt-dropdown-text) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 1px 4px rgba(0,0,0,.38),
+    0 0 0 1px rgba(255,255,255,.035) !important;
+  text-shadow: none !important;
+}
+
+body[data-page="admin-network-wireless"] select:hover,
+body[data-page="admin-network-wireless"] .cbi-select:hover,
+body[data-page="admin-network-wireless"] .cbi-dropdown:not(.btn):not(.cbi-button):hover,
+body[data-page="admin-network-wireless"] select:focus,
+body[data-page="admin-network-wireless"] .cbi-select:focus-within,
+body[data-page="admin-network-wireless"] .cbi-dropdown[open]:not(.btn):not(.cbi-button) {
+  border-color: rgba(255,176,32,.58) !important;
+  background-color: rgba(10, 15, 25, .985) !important;
+  color: #fff7e5 !important;
+  outline: none !important;
+  box-shadow:
+    0 0 0 3px rgba(255,176,32,.13),
+    inset 0 1px 4px rgba(0,0,0,.38) !important;
+}
+
+body[data-page="admin-network-wireless"] select option,
+body[data-page="admin-network-wireless"] select optgroup,
+body[data-page="admin-network-wireless"] #modal_overlay select option,
+body[data-page="admin-network-wireless"] #modal_overlay select optgroup {
+  background: #070b13 !important;
+  color: #eef5ff !important;
+}
+
+body[data-page="admin-network-wireless"] .cbi-dropdown > ul.preview,
+body[data-page="admin-network-wireless"] .cbi-dropdown[open] > ul.dropdown,
+body[data-page="admin-network-wireless"] #modal_overlay .cbi-dropdown > ul.preview,
+body[data-page="admin-network-wireless"] #modal_overlay .cbi-dropdown[open] > ul.dropdown {
+  min-width: 100% !important;
+  max-width: min(420px, calc(100vw - 32px)) !important;
+  margin-top: 6px !important;
+  padding: 6px !important;
+  border: 1px solid rgba(255,176,32,.32) !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(180deg, rgba(16,24,38,.99), rgba(7,11,19,.99)) !important;
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.48),
+    0 0 0 1px rgba(255,255,255,.055) inset !important;
+  overflow: auto !important;
+}
+
+body[data-page="admin-network-wireless"] .cbi-dropdown > ul.preview > li,
+body[data-page="admin-network-wireless"] .cbi-dropdown[open] > ul.dropdown > li,
+body[data-page="admin-network-wireless"] #modal_overlay .cbi-dropdown > ul.preview > li,
+body[data-page="admin-network-wireless"] #modal_overlay .cbi-dropdown[open] > ul.dropdown > li {
+  min-height: 32px !important;
+  padding: 7px 10px !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  color: var(--fwrt-dropdown-muted) !important;
+  line-height: 1.3 !important;
+  text-shadow: none !important;
+}
+
+body[data-page="admin-network-wireless"] .cbi-dropdown[open] > ul.dropdown > li.focus,
+body[data-page="admin-network-wireless"] .cbi-dropdown[open] > ul.dropdown > li:hover,
+body[data-page="admin-network-wireless"] .cbi-dropdown[open] > ul.dropdown > li[selected],
+body[data-page="admin-network-wireless"] #modal_overlay .cbi-dropdown[open] > ul.dropdown > li.focus,
+body[data-page="admin-network-wireless"] #modal_overlay .cbi-dropdown[open] > ul.dropdown > li:hover,
+body[data-page="admin-network-wireless"] #modal_overlay .cbi-dropdown[open] > ul.dropdown > li[selected] {
+  background: linear-gradient(90deg, rgba(255,176,32,.18), rgba(255,107,138,.10)) !important;
+  color: #fff7e5 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,176,32,.18) !important;
+}
+
+/* Wireless overview: compact radio/network badges and prevent tall icon labels */
+body[data-page="admin-network-wireless"] .cbi-section-table,
+body[data-page="admin-network-wireless"] table.table {
+  table-layout: auto !important;
+}
+
+body[data-page="admin-network-wireless"] .cbi-section-table .tr,
+body[data-page="admin-network-wireless"] table.table .tr,
+body[data-page="admin-network-wireless"] table.table tr {
+  min-height: 0 !important;
+}
+
+body[data-page="admin-network-wireless"] .cbi-section-table .td,
+body[data-page="admin-network-wireless"] .cbi-section-table .th,
+body[data-page="admin-network-wireless"] table.table .td,
+body[data-page="admin-network-wireless"] table.table .th,
+body[data-page="admin-network-wireless"] table.table td,
+body[data-page="admin-network-wireless"] table.table th {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  vertical-align: middle !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"],
+body[data-page="admin-network-wireless"] [data-name="_badge"] > div,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .td:first-child,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table td:first-child {
+  width: 1% !important;
+  min-width: 96px !important;
+  max-width: 170px !important;
+  white-space: nowrap !important;
+  text-align: left !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"] > div.center {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 168px !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+  padding: 4px 8px !important;
+  border-radius: 9px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025)), rgba(8,15,30,.72) !important;
+  border-color: rgba(255,176,32,.24) !important;
+  color: #eef5ff !important;
+  line-height: 1.15 !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 6px 16px rgba(0,0,0,.14) !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge {
+  min-width: 86px !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge img,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge img {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  flex: 0 0 22px !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge span,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge span {
+  min-width: 0 !important;
+  max-width: 126px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge small {
+  color: rgba(238,245,255,.62) !important;
+  font-size: 10.5px !important;
+  white-space: nowrap !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_stat"] {
+  min-width: 260px !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_stat"] > div,
+body[data-page="admin-network-wireless"] [data-name="_stat"] .ifacebadge {
+  max-width: 100% !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_stat"] big {
+  display: inline-block !important;
+  margin-right: 8px !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_stat"] big + div {
+  display: inline !important;
+  color: rgba(238,245,255,.72) !important;
+  line-height: 1.35 !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge {
+  position: relative !important;
+  isolation: isolate !important;
+  min-height: 40px !important;
+  padding: 6px 12px 6px 8px !important;
+  gap: 9px !important;
+  border: 1px solid rgba(80, 232, 255, .34) !important;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(135deg, rgba(80,232,255,.16), rgba(255,107,210,.08) 48%, rgba(9,17,34,.84)),
+    rgba(8,15,30,.78) !important;
+  color: #f5fbff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -1px 0 rgba(80,232,255,.08),
+    0 0 0 1px rgba(255,255,255,.03),
+    0 0 18px rgba(80,232,255,.18),
+    0 10px 26px rgba(0,0,0,.22) !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge::before {
+  content: none !important;
+  display: none !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-radio-badge::before {
+  content: none !important;
+  display: none !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-client-badge::before {
+  content: none !important;
+  display: none !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 1px !important;
+  z-index: -1 !important;
+  border-radius: inherit !important;
+  background: linear-gradient(90deg, rgba(80,232,255,.18), rgba(255,107,210,.14), rgba(255,176,32,.08)) !important;
+  opacity: .42 !important;
+  filter: blur(10px) !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge img {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  flex: 0 0 26px !important;
+  opacity: 1 !important;
+  padding: 4px !important;
+  border-radius: 10px !important;
+  background:
+    radial-gradient(circle at 48% 42%, rgba(255,255,255,.24), transparent 46%),
+    linear-gradient(145deg, rgba(80,232,255,.16), rgba(255,107,210,.10)) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.15),
+    0 0 9px rgba(80,232,255,.54),
+    0 0 18px rgba(255,107,210,.24) !important;
+  filter:
+    saturate(1.18)
+    brightness(1.2)
+    drop-shadow(0 0 5px rgba(80,232,255,.58))
+    drop-shadow(0 0 12px rgba(255,107,210,.25)) !important;
+  pointer-events: none !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge span,
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge small {
+  position: relative !important;
+  z-index: 1 !important;
+  text-shadow:
+    0 0 10px rgba(80,232,255,.32),
+    0 1px 2px rgba(0,0,0,.62) !important;
+}
+
+body[data-page="admin-status-processes"] table.table {
+  table-layout: auto !important;
+}
+
+body[data-page="admin-status-processes"] table.table th,
+body[data-page="admin-status-processes"] table.table td,
+body[data-page="admin-status-processes"] .table .th,
+body[data-page="admin-status-processes"] .table .td {
+  vertical-align: middle !important;
+}
+
+body[data-page="admin-status-processes"] table.table th:nth-child(1),
+body[data-page="admin-status-processes"] table.table td:nth-child(1),
+body[data-page="admin-status-processes"] table.table th:nth-child(2),
+body[data-page="admin-status-processes"] table.table td:nth-child(2),
+body[data-page="admin-status-processes"] table.table th:nth-child(4),
+body[data-page="admin-status-processes"] table.table td:nth-child(4),
+body[data-page="admin-status-processes"] table.table th:nth-child(5),
+body[data-page="admin-status-processes"] table.table td:nth-child(5) {
+  width: 1% !important;
+  white-space: nowrap !important;
+}
+
+body[data-page="admin-status-processes"] table.table th:last-child,
+body[data-page="admin-status-processes"] table.table td:last-child,
+body[data-page="admin-status-processes"] .fwrt-process-actions-cell {
+  width: 260px !important;
+  min-width: 240px !important;
+  max-width: 320px !important;
+  text-align: right !important;
+  white-space: normal !important;
+}
+
+body[data-page="admin-status-processes"] .fwrt-process-actions {
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 6px !important;
+  min-width: 236px !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+body[data-page="admin-status-processes"] .fwrt-process-actions .btn,
+body[data-page="admin-status-processes"] .fwrt-process-actions .cbi-button,
+body[data-page="admin-status-processes"] .fwrt-process-actions button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 64px !important;
+  max-width: none !important;
+  min-height: 30px !important;
+  height: 30px !important;
+  margin: 0 !important;
+  padding: 0 10px !important;
+  border-radius: 9px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+body[data-page="admin-status-processes"] .fwrt-process-actions .cbi-button-negative {
+  min-width: 78px !important;
+  border-color: rgba(255, 107, 138, .42) !important;
+  background:
+    linear-gradient(180deg, rgba(255,107,138,.22), rgba(255,107,138,.08)),
+    rgba(18, 22, 36, .78) !important;
+  color: #ffeaf0 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 12px rgba(255,107,138,.16) !important;
+}
+
+body[data-page="admin-status-processes"] .fwrt-process-actions .cbi-button-action {
+  border-color: rgba(80,232,255,.34) !important;
+  background:
+    linear-gradient(180deg, rgba(80,232,255,.18), rgba(80,232,255,.06)),
+    rgba(18, 22, 36, .74) !important;
+  color: #e8fbff !important;
+}
+
+body[data-page="admin-status-processes"] .fwrt-process-cpu-cell {
+  font-weight: 750 !important;
+  color: #dffcff !important;
+  text-shadow: 0 0 9px rgba(80,232,255,.24) !important;
+}
+
+body[data-page="admin-status-processes"] tr.fwrt-cpu-active-row > td,
+body[data-page="admin-status-processes"] .tr.fwrt-cpu-active-row > .td {
+  background:
+    linear-gradient(90deg, rgba(80,232,255,.12), rgba(255,107,210,.075) 44%, rgba(255,176,32,.04)),
+    rgba(8,15,30,.38) !important;
+  border-color: rgba(80,232,255,.22) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045),
+    inset 0 -1px 0 rgba(80,232,255,.08),
+    0 0 18px rgba(80,232,255,.12) !important;
+}
+
+body[data-page="admin-status-processes"] tr.fwrt-cpu-active-row > td:first-child,
+body[data-page="admin-status-processes"] .tr.fwrt-cpu-active-row > .td:first-child {
+  border-left: 2px solid rgba(80,232,255,.72) !important;
+  box-shadow:
+    inset 2px 0 0 rgba(255,107,210,.42),
+    0 0 18px rgba(80,232,255,.14) !important;
+}
+
+body[data-page="admin-status-processes"] tr.fwrt-cpu-active-row .fwrt-process-cpu-cell,
+body[data-page="admin-status-processes"] .tr.fwrt-cpu-active-row .fwrt-process-cpu-cell {
+  color: #fff7d7 !important;
+  text-shadow:
+    0 0 10px rgba(255,176,32,.42),
+    0 0 18px rgba(80,232,255,.22) !important;
+}
+
+@media (max-width: 760px) {
+  body[data-page="admin-status-processes"] table.table th:last-child,
+  body[data-page="admin-status-processes"] table.table td:last-child,
+  body[data-page="admin-status-processes"] .fwrt-process-actions-cell {
+    min-width: 188px !important;
+    width: 188px !important;
+  }
+
+  body[data-page="admin-status-processes"] .fwrt-process-actions {
+    min-width: 176px !important;
+    justify-content: flex-start !important;
+  }
+
+  body[data-page="admin-status-processes"] .fwrt-process-actions .btn,
+  body[data-page="admin-status-processes"] .fwrt-process-actions .cbi-button,
+  body[data-page="admin-status-processes"] .fwrt-process-actions button {
+    min-width: 54px !important;
+    height: 29px !important;
+    padding: 0 8px !important;
+    font-size: 11.5px !important;
+  }
+}
+
+body[data-page="admin-network-wireless"] .cbi-section-actions > div {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+}
+
+body[data-page="admin-network-wireless"] .cbi-section-actions .cbi-button {
+  min-height: 30px !important;
+  padding: 6px 9px !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 700px) {
+  body[data-page="admin-network-wireless"] [data-name="_badge"],
+  body[data-page="admin-network-wireless"] [data-name="_badge"] > div {
+    min-width: 74px !important;
+    max-width: 112px !important;
+  }
+
+  body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge,
+  body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge {
+    max-width: 112px !important;
+    padding: 4px 6px !important;
+    gap: 5px !important;
+  }
+
+  body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge span,
+  body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge span {
+    max-width: 76px !important;
+  }
+
+  body[data-page="admin-network-wireless"] [data-name="_stat"] {
+    min-width: 180px !important;
+  }
+
+  body[data-page="admin-network-wireless"] .cbi-section-actions > div {
+    flex-wrap: wrap !important;
+  }
+}
+
+/* Network Interfaces: direct action controls only, with generated empty wrappers collapsed. */
+body[data-page^="admin-network-network"] #maincontent.container,
+body[data-page^="admin-network-interface"] #maincontent.container {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  min-height: 0 !important;
+}
+
+body[data-page^="admin-network-network"] .fwrt-empty-structural,
+body[data-page^="admin-network-interface"] .fwrt-empty-structural {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+body[data-page^="admin-network-network"] .cbi-map,
+body[data-page^="admin-network-interface"] .cbi-map,
+body[data-page^="admin-network-network"] .cbi-section,
+body[data-page^="admin-network-interface"] .cbi-section {
+  margin-bottom: 8px !important;
+}
+
+body[data-page^="admin-network-network"] .cbi-page-actions,
+body[data-page^="admin-network-interface"] .cbi-page-actions,
+body[data-page^="admin-network-network"] .actions,
+body[data-page^="admin-network-interface"] .actions {
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  align-content: center !important;
+  justify-content: flex-end !important;
+  gap: 8px 10px !important;
+  clear: both !important;
+  margin-bottom: 0 !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  position: static !important;
+  text-align: right !important;
+}
+
+body[data-page^="admin-network-network"] .cbi-page-actions > form,
+body[data-page^="admin-network-interface"] .cbi-page-actions > form,
+body[data-page^="admin-network-network"] .actions > form,
+body[data-page^="admin-network-interface"] .actions > form {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  justify-content: flex-end !important;
+}
+
+body[data-page^="admin-network-network"] .cbi-page-actions > input,
+body[data-page^="admin-network-interface"] .cbi-page-actions > input,
+body[data-page^="admin-network-network"] .cbi-page-actions > button,
+body[data-page^="admin-network-interface"] .cbi-page-actions > button,
+body[data-page^="admin-network-network"] .cbi-page-actions > .btn,
+body[data-page^="admin-network-interface"] .cbi-page-actions > .btn,
+body[data-page^="admin-network-network"] .cbi-page-actions > .cbi-button,
+body[data-page^="admin-network-interface"] .cbi-page-actions > .cbi-button,
+body[data-page^="admin-network-network"] .cbi-page-actions > form > input,
+body[data-page^="admin-network-interface"] .cbi-page-actions > form > input,
+body[data-page^="admin-network-network"] .cbi-page-actions > form > button,
+body[data-page^="admin-network-interface"] .cbi-page-actions > form > button,
+body[data-page^="admin-network-network"] .cbi-page-actions > form > .btn,
+body[data-page^="admin-network-interface"] .cbi-page-actions > form > .btn,
+body[data-page^="admin-network-network"] .cbi-page-actions > form > .cbi-button,
+body[data-page^="admin-network-interface"] .cbi-page-actions > form > .cbi-button,
+body[data-page^="admin-network-network"] .actions > input,
+body[data-page^="admin-network-interface"] .actions > input,
+body[data-page^="admin-network-network"] .actions > button,
+body[data-page^="admin-network-interface"] .actions > button,
+body[data-page^="admin-network-network"] .actions > .btn,
+body[data-page^="admin-network-interface"] .actions > .btn,
+body[data-page^="admin-network-network"] .actions > .cbi-button,
+body[data-page^="admin-network-interface"] .actions > .cbi-button,
+body[data-page^="admin-network-network"] .actions > form > input,
+body[data-page^="admin-network-interface"] .actions > form > input,
+body[data-page^="admin-network-network"] .actions > form > button,
+body[data-page^="admin-network-interface"] .actions > form > button,
+body[data-page^="admin-network-network"] .actions > form > .btn,
+body[data-page^="admin-network-interface"] .actions > form > .btn,
+body[data-page^="admin-network-network"] .actions > form > .cbi-button,
+body[data-page^="admin-network-interface"] .actions > form > .cbi-button {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+  position: relative !important;
+  white-space: nowrap !important;
+}
+
+/* Final polish: keep stock wireless icons aligned with the active theme. */
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge {
+  min-height: 42px !important;
+  padding: 7px 13px 7px 9px !important;
+  gap: 10px !important;
+  border-color: rgba(98, 240, 255, .38) !important;
+  background:
+    linear-gradient(135deg, rgba(98,240,255,.14), rgba(255,111,218,.075) 52%, rgba(9,17,34,.86)),
+    radial-gradient(circle at 20% 0%, rgba(255,255,255,.16), transparent 34%),
+    rgba(8,15,30,.80) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -1px 0 rgba(98,240,255,.10),
+    0 0 0 1px rgba(255,255,255,.035),
+    0 0 16px rgba(98,240,255,.18),
+    0 0 30px rgba(255,111,218,.11),
+    0 12px 28px rgba(0,0,0,.24) !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge::before {
+  content: none !important;
+  display: none !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge img {
+  position: relative !important;
+  z-index: 1 !important;
+  display: inline-block !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  flex: 0 0 28px !important;
+  margin: 0 !important;
+  padding: 4px !important;
+  opacity: 1 !important;
+  border-radius: 10px !important;
+  background:
+    radial-gradient(circle at 48% 40%, rgba(255,255,255,.28), transparent 48%),
+    linear-gradient(145deg, rgba(98,240,255,.17), rgba(255,111,218,.10)) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.17),
+    0 0 10px rgba(98,240,255,.56),
+    0 0 20px rgba(255,111,218,.24) !important;
+  filter:
+    saturate(1.22)
+    brightness(1.22)
+    drop-shadow(0 0 5px rgba(98,240,255,.62))
+    drop-shadow(0 0 12px rgba(255,111,218,.26)) !important;
+}
+
+/* Premium port status strip: keep all LAN/WAN ports on one line with readable left-aligned text. */
+.network-status-table {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: stretch !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  padding: 4px 2px 10px !important;
+  margin: 0 0 14px !important;
+  scroll-snap-type: x proximity !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.network-status-table .ifacebox {
+  flex: 1 0 0 !important;
+  min-width: 138px !important;
+  max-width: none !important;
+  margin: 0 !important;
+  scroll-snap-align: start !important;
+  text-align: left !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(98,240,255,.20) !important;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.08), rgba(98,240,255,.035) 45%, rgba(255,111,218,.025)),
+    rgba(8, 15, 30, .76) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 10px 24px rgba(0,0,0,.18) !important;
+}
+
+.network-status-table .ifacebox .ifacebox-head,
+.network-status-table .ifacebox .ifacebox_head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-height: 29px !important;
+  padding: 6px 10px !important;
+  border-bottom: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 11px 11px 0 0 !important;
+  text-align: left !important;
+  font: 760 11px/1.15 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: rgba(238,245,255,.82) !important;
+  background: linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,.025)) !important;
+}
+
+.network-status-table .ifacebox .ifacebox-body,
+.network-status-table .ifacebox .ifacebox_body {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+  min-height: 78px !important;
+  height: 100% !important;
+  padding: 9px 10px 10px !important;
+  text-align: left !important;
+  white-space: normal !important;
+  color: rgba(238,245,255,.84) !important;
+}
+
+.network-status-table .ifacebox .ifacebox-body > *,
+.network-status-table .ifacebox .ifacebox_body > * {
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+.network-status-table .ifacebox .ifacebox-body > span,
+.network-status-table .ifacebox .ifacebox_body > span {
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  color: rgba(238,245,255,.88) !important;
+}
+
+.network-status-table .ifacebox .ifacebox-body > div,
+.network-status-table .ifacebox .ifacebox_body > div {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+.network-status-table .ifacebox .ifacebadge,
+.network-status-table .ifacebox .port-status-device,
+.network-status-table .ifacebox .port-status-link {
+  display: inline-flex !important;
+  flex: 1 1 auto !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 5px 7px !important;
+  border-radius: 9px !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.network-status-table .ifacebox img,
+.network-status-table .ifacebox .ifacebadge img,
+.network-status-table .ifacebox .port-status-device img,
+.network-status-table .ifacebox .port-status-link img {
+  flex: 0 0 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  margin: 0 !important;
+}
+
+.network-status-table .ifacebox.fwrt-active-port {
+  border-color: rgba(98,240,255,.42) !important;
+  background:
+    linear-gradient(145deg, rgba(98,240,255,.13), rgba(255,111,218,.055) 54%, rgba(8,15,30,.80)),
+    rgba(8, 15, 30, .80) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -1px 0 rgba(98,240,255,.10),
+    0 0 0 1px rgba(255,255,255,.035),
+    0 0 16px rgba(98,240,255,.20),
+    0 0 28px rgba(255,111,218,.10),
+    0 12px 28px rgba(0,0,0,.22) !important;
+}
+
+.network-status-table .ifacebox.fwrt-active-port .ifacebox-head,
+.network-status-table .ifacebox.fwrt-active-port .ifacebox_head {
+  color: #f4fbff !important;
+  border-bottom-color: rgba(98,240,255,.20) !important;
+  background:
+    linear-gradient(90deg, rgba(98,240,255,.16), rgba(255,111,218,.07)) !important;
+  text-shadow: 0 0 10px rgba(98,240,255,.28) !important;
+}
+
+.network-status-table .ifacebox.fwrt-active-port img {
+  filter:
+    saturate(1.16)
+    brightness(1.15)
+    drop-shadow(0 0 5px rgba(98,240,255,.58))
+    drop-shadow(0 0 12px rgba(255,111,218,.24)) !important;
+}
+
+.network-status-table .ifacebox.fwrt-inactive-port {
+  border-color: rgba(255,255,255,.10) !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018)),
+    rgba(8, 15, 30, .62) !important;
+  opacity: .9 !important;
+}
+
+.network-status-table .ifacebox.fwrt-inactive-port .ifacebox-head,
+.network-status-table .ifacebox.fwrt-inactive-port .ifacebox_head {
+  color: rgba(238,245,255,.56) !important;
+}
+
+@media (max-width: 720px) {
+  .network-status-table {
+    justify-content: flex-start !important;
+  }
+
+  .network-status-table .ifacebox {
+    flex-basis: 142px !important;
+  }
+}
+
+/* Final amber pass: align icon glows with the yellow UI. */
+:root {
+  --fwrt-amber: #ffb020;
+  --fwrt-amber-soft: rgba(255, 176, 32, .24);
+  --fwrt-amber-line: rgba(255, 176, 32, .46);
+  --fwrt-amber-hot: rgba(255, 214, 112, .52);
+  --fwrt-amber-text: #fff4d0;
+}
+
+.cbi-page-actions,
+.actions {
+  gap: 8px !important;
+  overflow: visible !important;
+  padding-bottom: 0 !important;
+}
+
+.cbi-page-actions .cbi-button-save:not(.cbi-dropdown),
+.cbi-page-actions input[name="cbi.save"],
+.actions .cbi-button-save:not(.cbi-dropdown) {
+  width: auto !important;
+  min-width: 118px !important;
+  max-width: none !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 16px !important;
+  border-radius: 10px !important;
+}
+
+/* Root Save & Apply fix: scope ComboButton layout to the footer action control only. */
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  position: relative !important;
+  width: auto !important;
+  min-width: 154px !important;
+  max-width: 100% !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 !important;
+  border: 1px solid var(--fwrt-amber-line) !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(180deg, rgba(255,176,32,.30), rgba(255,176,32,.12)),
+    rgba(14,20,32,.86) !important;
+  color: var(--fwrt-amber-text) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 0 14px rgba(255,176,32,.16) !important;
+  overflow: visible !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown),
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown),
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) {
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 118px !important;
+  max-width: 100% !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+  padding: 0 14px !important;
+  border: 0 !important;
+  border-radius: 9px 0 0 9px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  line-height: 1 !important;
+  list-style: none !important;
+  overflow: hidden !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown) > li,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li {
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  color: inherit !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown) > li:first-child,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li:first-child,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li:first-child {
+  display: inline-flex !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown) > li.fwrt-action-preview-extra,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li.fwrt-action-preview-extra,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li.fwrt-action-preview-extra {
+  display: none !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown) > li.fwrt-action-preview-main,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li.fwrt-action-preview-main,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) > li.fwrt-action-preview-main {
+  display: inline-flex !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > .open,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > .open,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > .open {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 36px !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  max-width: 36px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-left: 1px solid rgba(255,214,112,.30) !important;
+  border-radius: 0 9px 9px 0 !important;
+  background:
+    linear-gradient(180deg, rgba(255,214,112,.22), rgba(255,176,32,.08)) !important;
+  color: var(--fwrt-amber-text) !important;
+  box-shadow: inset 1px 0 0 rgba(255,255,255,.08) !important;
+  line-height: 1 !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul.dropdown,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul.dropdown,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul.dropdown {
+  display: none !important;
+  list-style: none !important;
+  margin: 0 !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply[open],
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open],
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open] {
+  z-index: 50000 !important;
+  border-color: rgba(255,214,112,.52) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 18px rgba(255,176,32,.18),
+    0 10px 26px rgba(0,0,0,.24) !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply[open] > ul.dropdown,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open] > ul.dropdown,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open] > ul.dropdown {
+  box-sizing: border-box !important;
+  display: block !important;
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  right: 0 !important;
+  left: auto !important;
+  z-index: 50001 !important;
+  min-width: 218px !important;
+  width: max-content !important;
+  max-width: min(92vw, 360px) !important;
+  height: auto !important;
+  max-height: 70vh !important;
+  padding: 6px !important;
+  border: 1px solid rgba(255,176,32,.34) !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(180deg, rgba(18,24,34,.98), rgba(8,11,18,.98)) !important;
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.42),
+    0 0 24px rgba(255,176,32,.15) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply[open] > ul.dropdown > li,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open] > ul.dropdown > li,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open] > ul.dropdown > li {
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-height: 34px !important;
+  width: 100% !important;
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+  color: #eef7ff !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply[open] > ul.dropdown > li:hover,
+.cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply[open] > ul.dropdown > li.focus,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open] > ul.dropdown > li:hover,
+.cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open] > ul.dropdown > li.focus,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open] > ul.dropdown > li:hover,
+.actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo[open] > ul.dropdown > li.focus {
+  background: linear-gradient(90deg, rgba(255,176,32,.20), rgba(255,214,112,.10)) !important;
+  color: #fff8df !important;
+}
+
+@media (max-width: 640px) {
+  .cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply,
+  .cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo,
+  .actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .cbi-page-actions .cbi-dropdown.cbi-button.cbi-button-apply > ul:not(.dropdown),
+  .cbi-page-actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown),
+  .actions .cbi-dropdown.cbi-button.fwrt-save-apply-combo > ul:not(.dropdown) {
+    min-width: 0 !important;
+  }
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge {
+  border-color: rgba(255,176,32,.34) !important;
+  background:
+    linear-gradient(135deg, rgba(255,176,32,.16), rgba(255,214,112,.07) 52%, rgba(9,17,34,.86)),
+    radial-gradient(circle at 20% 0%, rgba(255,244,208,.14), transparent 34%),
+    rgba(8,15,30,.80) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.13),
+    inset 0 -1px 0 rgba(255,176,32,.10),
+    0 0 0 1px rgba(255,255,255,.035),
+    0 0 16px rgba(255,176,32,.18),
+    0 12px 28px rgba(0,0,0,.24) !important;
+}
+
+body[data-page="admin-network-wireless"] .ifacebadge.fwrt-wireless-neon-badge img {
+  background:
+    radial-gradient(circle at 48% 40%, rgba(255,244,208,.28), transparent 48%),
+    linear-gradient(145deg, rgba(255,176,32,.18), rgba(255,214,112,.09)) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.16),
+    0 0 9px rgba(255,176,32,.46),
+    0 0 18px rgba(255,214,112,.18) !important;
+  filter:
+    saturate(1.16)
+    brightness(1.15)
+    drop-shadow(0 0 5px rgba(255,176,32,.52))
+    drop-shadow(0 0 12px rgba(255,214,112,.20)) !important;
+}
+
+body[data-page^="admin-network-network"] .ifacebadge,
+body[data-page^="admin-network-interface"] .ifacebadge,
+body[data-page^="admin-network-network"] .ifacebox,
+body[data-page^="admin-network-interface"] .ifacebox {
+  border-radius: 11px !important;
+  border-color: rgba(255,176,32,.18) !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,176,32,.035)),
+    rgba(8,15,30,.72) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    0 8px 20px rgba(0,0,0,.16) !important;
+}
+
+body[data-page^="admin-network-network"] .ifacebadge.fwrt-active-port,
+body[data-page^="admin-network-interface"] .ifacebadge.fwrt-active-port,
+body[data-page^="admin-network-network"] .ifacebox.fwrt-active-port,
+body[data-page^="admin-network-interface"] .ifacebox.fwrt-active-port {
+  border-color: rgba(255,176,32,.44) !important;
+  background:
+    linear-gradient(145deg, rgba(255,176,32,.14), rgba(255,214,112,.055) 54%, rgba(8,15,30,.80)),
+    rgba(8,15,30,.80) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.13),
+    inset 0 -1px 0 rgba(255,176,32,.10),
+    0 0 0 1px rgba(255,255,255,.035),
+    0 0 16px rgba(255,176,32,.20),
+    0 12px 28px rgba(0,0,0,.22) !important;
+}
+
+body[data-page^="admin-network-network"] .ifacebadge.fwrt-active-port img,
+body[data-page^="admin-network-interface"] .ifacebadge.fwrt-active-port img,
+body[data-page^="admin-network-network"] .ifacebox.fwrt-active-port img,
+body[data-page^="admin-network-interface"] .ifacebox.fwrt-active-port img,
+body[data-page^="admin-network-network"] .ifacebadge-active img,
+body[data-page^="admin-network-interface"] .ifacebadge-active img {
+  filter:
+    saturate(1.14)
+    brightness(1.12)
+    drop-shadow(0 0 4px rgba(255,176,32,.56))
+    drop-shadow(0 0 10px rgba(255,214,112,.22)) !important;
+}
+
+body[data-page^="admin-network-network"] .cbi-section,
+body[data-page^="admin-network-interface"] .cbi-section {
+  border-color: rgba(255,176,32,.14) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 10px 24px rgba(0,0,0,.10) !important;
+}
+
+body[data-page^="admin-network-network"] .cbi-section-table .tr,
+body[data-page^="admin-network-interface"] .cbi-section-table .tr,
+body[data-page^="admin-network-network"] table.table tr,
+body[data-page^="admin-network-interface"] table.table tr {
+  vertical-align: middle !important;
+}
+
+/* Process table memory activity highlight, aligned with the amber UI. */
+body[data-page="admin-status-processes"] tr.fwrt-mem-active-row > td,
+body[data-page="admin-status-processes"] .tr.fwrt-mem-active-row > .td {
+  background:
+    linear-gradient(90deg, rgba(255,176,32,.115), rgba(255,214,112,.045) 58%, rgba(255,176,32,.025)),
+    rgba(11, 17, 28, .58) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045),
+    inset 0 -1px 0 rgba(255,176,32,.075) !important;
+}
+
+body[data-page="admin-status-processes"] tr.fwrt-mem-active-row > td:first-child,
+body[data-page="admin-status-processes"] .tr.fwrt-mem-active-row > .td:first-child {
+  box-shadow:
+    inset 3px 0 0 rgba(255,176,32,.72),
+    inset 0 1px 0 rgba(255,255,255,.045),
+    inset 0 -1px 0 rgba(255,176,32,.075) !important;
+}
+
+body[data-page="admin-status-processes"] tr.fwrt-cpu-active-row.fwrt-mem-active-row > td,
+body[data-page="admin-status-processes"] .tr.fwrt-cpu-active-row.fwrt-mem-active-row > .td {
+  background:
+    linear-gradient(90deg, rgba(255,176,32,.18), rgba(255,214,112,.07) 62%, rgba(255,176,32,.035)),
+    rgba(11, 17, 28, .62) !important;
+}
+
+body[data-page="admin-status-processes"] .fwrt-process-mem-cell {
+  color: #fff4d0 !important;
+  font-weight: 700 !important;
+  text-shadow:
+    0 0 7px rgba(255,176,32,.42),
+    0 0 16px rgba(255,214,112,.18) !important;
+}
+
+/* Final wireless badge fit and premium amber glow pass. */
+body[data-page="admin-network-wireless"] [data-name="_badge"] > div.center,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .td:first-child,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table td:first-child {
+  min-width: 0 !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge.fwrt-wireless-neon-badge,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge.fwrt-wireless-neon-badge {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: auto !important;
+  max-width: 100% !important;
+  min-height: 42px !important;
+  padding: 7px 10px 7px 8px !important;
+  gap: 8px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 188, 54, .42) !important;
+  border-radius: 11px !important;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 245, 205, .18), transparent 34%),
+    linear-gradient(135deg, rgba(255, 184, 40, .18), rgba(204, 137, 20, .075) 48%, rgba(9, 15, 26, .88)),
+    rgba(8, 14, 26, .88) !important;
+  color: #fff3cf !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -1px 0 rgba(255,184,40,.12),
+    0 0 0 1px rgba(255,255,255,.035),
+    0 0 13px rgba(255,184,40,.18),
+    0 8px 22px rgba(0,0,0,.24) !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge.fwrt-wireless-neon-badge::after,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge.fwrt-wireless-neon-badge::after {
+  background:
+    linear-gradient(90deg, rgba(255, 209, 104, .18), rgba(255, 166, 24, .13), rgba(255, 232, 159, .08)) !important;
+  opacity: .34 !important;
+  filter: blur(9px) !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge.fwrt-wireless-neon-badge img,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge.fwrt-wireless-neon-badge img {
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  flex: 0 0 26px !important;
+  padding: 4px !important;
+  border-radius: 9px !important;
+  background:
+    radial-gradient(circle at 48% 38%, rgba(255, 248, 220, .30), transparent 48%),
+    linear-gradient(145deg, rgba(255, 191, 48, .20), rgba(181, 116, 16, .08)) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.15),
+    0 0 7px rgba(255,188,54,.42),
+    0 0 15px rgba(255,226,140,.16) !important;
+  filter:
+    saturate(1.08)
+    brightness(1.11)
+    drop-shadow(0 0 4px rgba(255,188,54,.44))
+    drop-shadow(0 0 10px rgba(255,226,140,.16)) !important;
+}
+
+body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge.fwrt-wireless-neon-badge span,
+body[data-page="admin-network-wireless"] [data-name="_badge"] .ifacebadge.fwrt-wireless-neon-badge small,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge.fwrt-wireless-neon-badge span,
+body[data-page="admin-network-wireless"] #wifi_assoclist_table .ifacebadge.fwrt-wireless-neon-badge small {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  line-height: 1.2 !important;
+  color: #fff3cf !important;
+  text-shadow:
+    0 0 7px rgba(255,184,40,.30),
+    0 1px 2px rgba(0,0,0,.66) !important;
+}
